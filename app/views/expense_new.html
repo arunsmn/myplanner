@@ -1,0 +1,64 @@
+<div class="container expenseBox" ng-controller="ExpenseItemCtrl">
+	<div class="header">
+      <div class="navbar navbar-default" role="navigation">
+          <div class="navbar-header">
+            <div class="row">
+              <div class="col-md-8 col-xs-10">
+                <a class="navbar-brand" href="#/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;Expense tracker</a> 
+              </div>
+              <div class="col-md-4 col-xs-2">
+                 <p style="float:right;"><a title="Add Expense" class="addBtn btn btn-primary" role="button" data-toggle="collapse" href=":itemId/#expenseForm" aria-expanded="false" aria-controls="expenseForm"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </a></p>
+              </div>  
+            </div>
+          </div>
+      </div>
+    </div>  
+
+    <div class="row">  
+      <div class="col-md-4 currentBudget">
+          <a title="Back" href="#/budget" style="left:0;float:left;top:3px;font-size:18px;color:#333;"><span style="top:3px;" class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a> &nbsp;<span style="font-size:18px;">{{ item.name }}</span>
+      </div>
+      <div class="col-md-4" id="totalAmt">
+          <h4> Total: 
+            <span ng-if="expenseTotal==0">0</span> 
+            <span ng-if="expenseTotal!==0">{{ expenseTotal }}</span>
+          </h4>
+      </div>
+      <div id="balAmt" class="col-md-4">
+         <h4>Balance: <span>{{ expenseBalance }}</span></h4>
+      </div>
+    </div>
+    
+
+    <div class="collapse" id="expenseForm">
+      <form class="form-inline" data-ng-submit="addExpenseName()">   
+        <div class="form-group">
+          <label for="budgetName">Name:</label> 
+          <input data-ng-model="expenseNameText" id="expenseName" type="text" name="expenseName" required>
+        </div>
+        <div class="form-group">
+          <label for="budgetAmount">Amount:</label>
+          <input data-ng-model="expenseAmountText" id="expenseAmount" type="number" name="expenseAmount" required>
+        </div>  
+        <button class="btn btn-primary" type="submit">Add</button>
+      </form>
+    </div>       
+
+    <div ng-show="flag" class="defaultList"><b>NONE</b></div>
+    <perfect-scrollbar class="scroller" wheel-propagation="true" wheel-speed="10" min-scrollbar-length="10">
+     <ul class="nameList"><li data-ng-repeat="eitem in eitems | orderBy:'-id' track by $index">{{ eitem.expenseName }} {{ eitem.expenseAmount }}<button class="deleteExpBtn btn pull-right" type="button" ng-click="deleteExpenseName(eitem.id,itemId)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></li>
+     </ul> 
+    </perfect-scrollbar>
+
+
+    <div class="footer">
+          <div class="row">
+            <div class="col-md-6 col-xs-6 col-sm-6">
+               <p class="pull-left">copyright@2015</p>
+            </div>        
+            <div class="col-md-6 col-xs-6 col-sm-6">
+               <p class="pull-right">Expense Tracker</p>
+            </div>        
+          </div>
+    </div>  
+</div>
