@@ -76,6 +76,13 @@
        }
       $scope.flag = false;
     }  
+    
+    if ($scope.expenseBalance < 0){
+          $('#balAmt').css({ background: "Red" }, "slow");
+       }
+       else {
+          $('#balAmt').css({ background: "#2ecc71" }, "slow");
+       }
 
     $scope.deleteExpenseName = function(id,pid,eTotal) {
        $scope.eitems = JSON.parse(localStorage.getItem('data')); 
